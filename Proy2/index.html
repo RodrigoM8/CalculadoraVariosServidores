@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Calculadora | Modelos de Líneas de Espera de VARIOS servidores</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <link rel="stylesheet" href="app-main.css">
+    <script type="text/javascript" src="app-main.js"></script>
+
+
+</head>
+
+<body>
+    <section>
+        <div class="container p-4">
+            <div class="row" id="all-results" style="display: block;">
+                <section class="bg-2">
+                    <div class="row">
+                        <section class="bg-2" id="Form">
+                            <div class="container p-4 my-4 text-center ">
+                                <H3 class="p2 text-center"> MODELOS DE LÍNEAS DE ESPERA </H3>
+                                <H4 class="p2 text-center"> (DE VARIOS SERVIDORES) </H4>
+                                <div class="row text-center">`
+                                    <div class="row" style="padding: 4% 4% 0% 4%">
+                                        <p class="text-center">MODELO A CALCULAR:</p>
+                                        <select class="form text-center " aria-label="Default select example"
+                                            onchange="showOptions(this)" id="opt">
+                                            <option value="1">SIN LÍMITE EN COLA</option>
+                                            <option value="2">CON LÍMITE EN COLA</option>
+                                        </select>
+                                    </div>
+                                    <div class="row p-4" id="all-results" style="display: block; margin: 0% 1%;">
+
+                                        <div class="p-4 row" id="form">
+                                            <div class="col-md-6 mb-2">
+                                                <div class="form-group mb-2">
+                                                    <input min="0" type="text"
+                                                        oninput="this.value=this.value.replace(/[^0-9]/g,'');"
+                                                        placeholder="Distribución de llegadas (λ)" id="tasaLlegada"
+                                                        class="form-control bdr1 text-center" autofocus>
+                                                    </input>
+
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6 mb-2">
+                                                <div class="form-group mb-2">
+                                                    <input min="0" type="text"
+                                                        oninput="this.value=this.value.replace(/[^0-9]/g,'');"
+                                                        placeholder="Distribución de tiempo de servicio (μ)"
+                                                        id="tiempoServicio" class="form-control bdr1 text-center">
+                                                    </input>
+
+                                                </div>
+                                            </div>
+
+                                            <div>
+                                                <div class="form-group mb-2">
+                                                    <input min="0" type="text"
+                                                        oninput="this.value=this.value.replace(/[^0-9]/g,'');"
+                                                        placeholder="Cantidad de servidores (c)" id="cantidadServ"
+                                                        class="form-control bdr1 text-center">
+                                                    </input>
+
+                                                </div>
+                                            </div>
+
+                                            <div style="margin-top: 3%;">
+                                                <div class="form-group mb-2">
+                                                    <input min="0" type="text"
+                                                        oninput="this.value=this.value.replace(/[^0-9]/g,'');"
+                                                        placeholder="Límite en la cola (n)" id="limit"
+                                                        class="form-control bdr1 text-center" style="display: none;">
+                                                    </input>
+
+                                                </div>
+                                            </div>
+                                            <div style="margin-top: 3%;">
+                                                <div class="form-group mb-2">
+                                                    <button class="btn btn-primary btn-block form-control text-center"
+                                                        onclick="EjecuteCalc()">
+                                                        Calcular
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                        </section>
+                    </div>
+
+
+                    <div class="container p-4 my-4 " id="Results">
+                        <div class="row text-center">`
+                            <br>
+                            <h3>Valores ingresados:</h3>
+
+                            <section class="bg-2 row p4" id="Calvalues2" style="padding: 5%; display: none; ">
+                                <div class="col-sm mb-1 text-dark">
+                                    <p>D. de llegadas (λ)</p>
+                                    <span class="d-block h4 rect" id="Lambda2"></span>
+                                </div>
+                                <div class="col-sm mb-1 text-dark" id="mostrarLimite">
+                                    <p>Límite en la cola</p>
+                                    <span class="d-block h4 rect" id="limiteCola"></span>
+                                </div>
+                                <div class="col-sm mb-1 text-dark">
+                                    <p>D. tiempo de servicio (μ)</p>
+                                    <span class="d-block h4 rect" id="Mu2"></span>
+                                </div>
+                                <div class="col-sm mb-1 text-dark">
+                                    <p>Cantidad de Servidores (c)</p>
+                                    <span class="d-block h4 rect" id="servidores2"></span>
+                                </div>
+                            </section>
+
+
+                            <section class="bg-2 row p4" id="Calvalues1" style="padding: 5%">
+                                <div class="col-sm mb-3 text-dark">
+                                    <p>Distribución de llegadas (λ)</p>
+                                    <span class="d-block h4 rect" id="Lambda1"></span>
+                                </div>
+                                <div class="col-sm mb-3 text-dark">
+                                    <p>Distribución de tiempo de servicio (μ)</p>
+                                    <span class="d-block h4 rect" id="Mu1"></span>
+                                </div>
+                                <div class="col-sm mb-3 text-dark">
+                                    <p>Cantidad de Servidores (c)</p>
+                                    <span class="d-block h4 rect" id="servidores1"></span>
+                                </div>
+                            </section>
+
+                            <hr>
+                            <br>
+                            
+                            <h3>Resultados Obtenidos:</h3>
+                            <h5>(Medidas de desempeño del sistema)</h5>
+
+                            <section class="bg-2" id="olvalues" style="display: none;">
+
+                                <div class="col-md-4 mb-2 text-dark">
+                                    <p>Rho (ρ)</p>
+                                    <span class="d-block h2 rect" id="result1">1</span>
+                                </div>
+                                <div class="col-md-4 mb-2 text-dark">
+                                    <p>Probabilidad del sistema vacío (P0)</p>
+                                    <span class="d-block h2 rect" id="result2">2</span>
+                                </div>
+                                <div class="col-md-4 mb-2 text-dark">
+                                    <p>Cantidad de clientes en el sistema (Ls)</p>
+                                    <span class="d-block h2 rect" id="result3">3</span>
+                                </div>
+                                <div class="col-md-4 mb-2 text-dark">
+                                    <p>Cantidad de clientes en la cola (Lq)</p>
+                                    <span class="d-block h2 rect" id="result4">4</span>
+                                </div>
+                                <div class="col-md-4 mb-2 text-dark">
+                                    <p>Tiempo promedio de los ´clientes´ en el sistema (Ws)</p>
+                                    <span class="d-block h2 rect" id="result5">5</span>
+                                </div>
+                                <div class="col-md-4 mb-2 text-dark">
+                                    <p>Tiempo promedio de los ´clientes´ en la cola (Wq)</p>
+                                    <span class="d-block h2 rect" id="result6">6</span>
+                                </div>
+                                <div class="col-md-6 mb-2 text-dark classhidden hidden">
+                                    <p>Resultado</p>
+                                    <span class="d-block h2 rect" id="result7">7</span>
+                                </div>
+                            </section>
+
+                            <section id="Values" style="display: block;">
+                                <table id="tabelas" class="table table-hover"></table>
+                            </section>
+
+                            <section id="Values2" style="display: none;">
+                                <hr>
+                                <br>
+                                <h3> Resultados Obtenidos 'Pn'</h3>
+                                <h5> (Distribuciones de Probabilidad) </h5>
+                                <table id="tabelas2" class="table table-hover"></table>
+                            </section>
+
+                            <button class="btn btn-primary btn-block form-control text-center no-print"
+                                onclick="printPageArea()">
+                                Imprimir Resultados
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </div>
+</body>
+
+</html>

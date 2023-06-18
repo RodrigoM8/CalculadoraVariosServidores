@@ -1,0 +1,61 @@
+ 
+
+@page {
+    size: letter;
+    margin: 0;
+  }
+  @media print {
+    #Results{
+        padding: 5%;
+    }
+
+    .no-print{
+        display: none !important;
+    }
+
+    html, body {
+      width: 210mm;
+      height: 297mm;
+      min-height: 297mm;
+    }
+  }
+
+
+  html, body {
+    background-color: #FFBB52 !important;
+  }
+
+  
+        .bdr1{
+            border: 1px solid #000;
+        }
+        .form-check-input{
+            background-color: #b9b9b9;
+        }
+        .bg-1{
+            background-color: #b9b9b9;
+        }
+        .bg-2{
+            background-color: #fff;
+        }
+        .height{
+            height: 100%;
+        }
+        .rect{
+            background-color: #000;
+            color: #fff;
+            width: fit-content;
+            height: 50px;
+            line-height: 1.9;
+            text-align: center;
+            margin: auto;
+            padding: 0px 10px;
+            border-radius: 15px;
+            text-indent: 2px;
+        }
+        .hidden{
+            display: none;
+        }
+        .text-bold{
+            font-weight: bold;
+        }
